@@ -314,6 +314,9 @@ void GeometryViewer::initContext(GLContextData& contextData) const
 //----------------------------------------------------------------------------
 void GeometryViewer::display(GLContextData &contextData) const
 {
+  // Save OpenGL state
+  glPushAttrib(GL_ENABLE_BIT|GL_POLYGON_BIT);
+
   int maxClipPlanes;
   glGetIntegerv(GL_MAX_CLIP_PLANES, &maxClipPlanes);
   int clipPlaneIdx = 0;
@@ -381,6 +384,9 @@ void GeometryViewer::display(GLContextData &contextData) const
       ++clipPlaneIdx;
       }
     }
+
+  // Restore OpenGL state
+  glPopAttrib();
 }
 
 //----------------------------------------------------------------------------
